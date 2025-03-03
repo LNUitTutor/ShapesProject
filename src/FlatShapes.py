@@ -15,6 +15,16 @@ class Rectangle:
     def __gt__(self, other):
         return self.area() > other.area()
 
+# Оголосіть клас, що моделює квадрат
+
+class Square(Rectangle):
+    def __init__(self,a=1):
+        Rectangle.__init__(self, a, a)
+    def __str__(self):
+        return f'square:{self.a}x{self.a}'
+
+
+
 if __name__ == '__main__':
     R = Rectangle(2,3)
     print(R)
@@ -24,5 +34,9 @@ if __name__ == '__main__':
     print(P)
     print('S =', P.area())
     print('P =', P.perim())
-    print(max(P,R))
+    S = Square(5)
+    print(S)
+    print('S =', S.area())
+    print('P =', S.perim())
+    print(max(P,R,S))
 
