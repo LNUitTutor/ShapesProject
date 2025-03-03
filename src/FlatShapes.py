@@ -48,6 +48,19 @@ class Circle(Shape):
     def perim(self):
         return 2 * math.pi * self.r 
 
+class Triangle(Shape):
+    def __init__(self, side1 = 3, side2 = 4, angle = 90):
+        self.a = side1
+        self.b = side2
+        self.y = angle
+    def __str__(self):
+        return f'triangle:{self.a}^{self.y}^{self.b}'
+    def area(self):
+        return 0.5 * self.a * self.b * math.sin(math.radians(self.y))
+    def side_c(self):
+        return math.sqrt(self.a**2 + self.b**2 - 2*self.a*self.b*math.cos(math.radians(self.y)))
+    def perim(self):
+        return self.a + self.b + self.side_c()
 
 
 if __name__ == '__main__':
@@ -67,5 +80,9 @@ if __name__ == '__main__':
     print(C)
     print('S =', C.area())
     print('P =', C.perim())
-    print(max(P,R,S,C))
+    T = Triangle()
+    print(T)
+    print('S =', T.area())
+    print('P =', T.perim())
+    print(max(P,R,S,C,T))
 
