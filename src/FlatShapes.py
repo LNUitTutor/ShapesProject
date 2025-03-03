@@ -1,5 +1,6 @@
 # Оголосити клас, що моделює геометричну фігуру прямокутник
 # Прямокутник уміє повідомляти свої площу та периметр
+# Прямокутники порівнюють за площею
 
 class Rectangle:
     def __init__(self,width=3,length=4):
@@ -11,6 +12,8 @@ class Rectangle:
         return self.a*self.b
     def perim(self):
         return 2*(self.a+self.b)
+    def __gt__(self, other):
+        return self.area() > other.area()
 
 if __name__ == '__main__':
     R = Rectangle(2,3)
@@ -21,4 +24,5 @@ if __name__ == '__main__':
     print(P)
     print('S =', P.area())
     print('P =', P.perim())
+    print(max(P,R))
 
