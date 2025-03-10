@@ -14,7 +14,9 @@ class Cylinder:
         return self.base.area()
     def TotalArea(self):
         return 2*self.BaseArea()+self.LateralArea()
-        
+    def __gt__(self,other):
+        return self.Volume()> other.Volume()
+    
 
 if __name__ == '__main__':
     a = Cylinder()
@@ -23,4 +25,9 @@ if __name__ == '__main__':
     print('v=', a.Volume(),'s=', a.TotalArea())
     print(b)
     print('v=', b.Volume(),'s=', b.TotalArea())
+    if a>b:
+        print("max=",a)
+    else:
+        print("max=",b)
+        
     
