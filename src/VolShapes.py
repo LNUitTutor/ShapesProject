@@ -31,6 +31,12 @@ class Parallelepiped(Shape3D):
     def __str__(self):
         return f'Parallelepiped[{self.base.a} x {self.base.b} x {self.height}]'
 
+class TriangularPrism(Shape3D):
+    def __init__(self, side1 = 3, side2 = 3, angle = 60, h = 5):
+        Shape3D.__init__(self, Triangle(side1, side2, angle), h)
+    def __str__(self):
+        return f'TriangularPrism[base = {self.base}, h = {self.height}]'
+
 
 if __name__ == '__main__':
     a = Cylinder()
@@ -49,5 +55,15 @@ if __name__ == '__main__':
     print('v =', c.Volume(),'  s =', c.TotalArea())
     print(d)
     print('v =', d.Volume(),'  s =', d.TotalArea())
+    e = TriangularPrism()
+    f = TriangularPrism(5, 12, 90, 13.5)
+    print(e)
+    print('v =', e.Volume(),'  s =', e.TotalArea())
+    print(f)
+    print('v =', f.Volume(),'  s =', f.TotalArea())
+    L = {a, b, c, d, e, f}
+    print('Largest shape is', max(L))
+    print('Total surface is', sum(s.TotalArea() for s in L))
+
         
     
