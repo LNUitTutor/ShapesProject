@@ -25,6 +25,13 @@ class Cylinder(Shape3D):
     def __str__(self):
         return f'Cylinder[r = {self.base.r}, h = {self.height}]'
         
+class Parallelepiped(Shape3D):
+    def __init__(self, a = 3, b = 4, c = 5):
+        Shape3D.__init__(self, Rectangle(a, b), c)
+    def __str__(self):
+        return f'Parallelepiped[{self.base.a} x {self.base.b} x {self.height}]'
+
+
 if __name__ == '__main__':
     a = Cylinder()
     b = Cylinder(5, 8)
@@ -36,5 +43,11 @@ if __name__ == '__main__':
         print("max =",a)
     else:
         print("max =",b)
+    c = Parallelepiped()
+    d = Parallelepiped(3, 3, 3)
+    print(c)
+    print('v =', c.Volume(),'  s =', c.TotalArea())
+    print(d)
+    print('v =', d.Volume(),'  s =', d.TotalArea())
         
     
