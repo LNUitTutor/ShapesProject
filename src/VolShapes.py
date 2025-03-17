@@ -5,33 +5,44 @@ class Shape3D(ABC):
     def __init__(self, shape, number):
         self.base = shape
         self.height = number
+    @abstractmethod
     def Volume(self):
-        return self.base.area() * self.height
+        pass
+    @abstractmethod
     def LateralArea(self):
-        return self.base.perim() * self.height
+        pass
     def BaseArea(self):
         return self.base.area()
+    @abstractmethod
     def TotalArea(self):
-        return 2*self.BaseArea() + self.LateralArea()
+        pass
     def __gt__(self,other):
         return self.Volume() > other.Volume()
     @abstractmethod
     def __str__(self):
         pass
 
-class Cylinder(Shape3D):
+class DirectShape(Shape3D):
+    def Volume(self):
+        return self.base.area() * self.height
+    def LateralArea(self):
+        return self.base.perim() * self.height
+    def TotalArea(self):
+        return 2*self.BaseArea() + self.LateralArea()
+
+class Cylinder(DirectShape):
     def __init__(self, radius = 1, height = 1):
         Shape3D.__init__(self, Circle(radius), height)
     def __str__(self):
         return f'Cylinder[r = {self.base.r}, h = {self.height}]'
         
-class Parallelepiped(Shape3D):
+class Parallelepiped(DirectShape):
     def __init__(self, a = 3, b = 4, c = 5):
         Shape3D.__init__(self, Rectangle(a, b), c)
     def __str__(self):
         return f'Parallelepiped[{self.base.a} x {self.base.b} x {self.height}]'
 
-class TriangularPrism(Shape3D):
+class TriangularPrism(DirectShape):
     def __init__(self, side1 = 3, side2 = 3, angle = 60, h = 5):
         Shape3D.__init__(self, Triangle(side1, side2, angle), h)
     def __str__(self):
