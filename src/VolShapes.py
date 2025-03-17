@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from math import sqrt
 from FlatShapes import *
 
 class Shape3D(ABC):
@@ -48,6 +49,41 @@ class TriangularPrism(DirectShape):
     def __str__(self):
         return f'TriangularPrism[base = {self.base}, h = {self.height}]'
 
+class ConicalShape(Shape3D):
+    def Volume(self):
+        return self.base.area() * self.height / 3
+    def TotalArea(self):
+        return self.BaseArea() + self.LateralArea()
+
+class Cone(ConicalShape):
+    def __init__(self, radius = 1, height = 1):
+        Shape3D.__init__(self, Circle(radius), height)
+    def __str__(self):
+        return f'Cone/r = {self.base.r}, h = {self.height}\\'
+    def LateralArea(self):
+        L = sqrt(self.base.r ** 2 + self.height ** 2)
+        return 0.5 * self.base.perim() * L
+
+class RectangularPyramid(ConicalShape):
+    def __init__(self, a = 3, b = 4, height = 1):
+        Shape3D.__init__(self, Rectangle(a, b), height)
+    def __str__(self):
+        return f'Rectangular Pyramid/base = {self.base}, h = {self.height}\\'
+    def LateralArea(self):
+        Ha = sqrt((self.base.b*0.5) ** 2 + self.height ** 2)
+        Hb = sqrt((self.base.a*0.5) ** 2 + self.height ** 2)
+        return self.base.a * Ha + self.base.b * Hb
+
+class TriangularPyramid(ConicalShape):
+    def __init__(self, side1 = 3, side2 = 3, angle = 60, height = 1):
+        Shape3D.__init__(self, Triangle(side1, side2, angle), height)
+    def __str__(self):
+        return f'Triangular Pyramid/base = {self.base}, h = {self.height}\\'
+    def LateralArea(self):
+        r = self.base.area() * 2 / self.base.perim()
+        apopheme = sqrt(r ** 2 + self.height ** 2)
+        return 0.5 * self.base.perim() * apopheme
+
 
 if __name__ == '__main__':
     a = Cylinder()
@@ -72,7 +108,13 @@ if __name__ == '__main__':
     print('v =', e.Volume(),'  s =', e.TotalArea())
     print(f)
     print('v =', f.Volume(),'  s =', f.TotalArea())
-    L = {a, b, c, d, e, f}
+    g = Cone()
+    print(g)
+    h = RectangularPyramid()
+    print(h)
+    i = TriangularPyramid()
+    print(i)
+    L = {a, b, c, d, e, f, g, h, i}
     print('Largest shape is', max(L))
     print('Total surface is', sum(s.TotalArea() for s in L))
 
