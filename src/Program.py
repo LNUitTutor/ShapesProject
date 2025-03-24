@@ -12,6 +12,7 @@ for s in L:
     print(s)
 
 print(L)
+
 txt = L.__str__()
 copy = eval(txt)
 print(copy)
