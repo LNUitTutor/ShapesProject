@@ -36,12 +36,16 @@ class Cylinder(DirectShape):
         Shape3D.__init__(self, Circle(radius), height)
     def __str__(self):
         return f'Cylinder[r = {self.base.r}, h = {self.height}]'
+    def __repr__(self):
+        return f'Cylinder({self.base.r}, {self.height})'
         
 class Parallelepiped(DirectShape):
     def __init__(self, a = 3, b = 4, c = 5):
         Shape3D.__init__(self, Rectangle(a, b), c)
     def __str__(self):
         return f'Parallelepiped[{self.base.a} x {self.base.b} x {self.height}]'
+    def __repr__(self):
+        return f'Parallelepiped({self.base.a}, {self.base.b}, {self.height})'
 
 class TriangularPrism(DirectShape):
     def __init__(self, side1 = 3, side2 = 3, angle = 60, h = 5):
@@ -60,6 +64,8 @@ class Cone(ConicalShape):
         Shape3D.__init__(self, Circle(radius), height)
     def __str__(self):
         return f'Cone/r = {self.base.r}, h = {self.height}\\'
+    def __repr__(self):
+        return f'Cone({self.base.r}, {self.height})'
     def LateralArea(self):
         L = sqrt(self.base.r ** 2 + self.height ** 2)
         return 0.5 * self.base.perim() * L
